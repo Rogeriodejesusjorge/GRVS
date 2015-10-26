@@ -1,0 +1,301 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9731,        292]
+NotebookOptionsPosition[      9426,        277]
+NotebookOutlinePosition[      9805,        293]
+CellTagsIndexPosition[      9762,        290]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "preamble.m"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "Geodesics.m"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"toftautemp", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Tau]", ",", 
+        RowBox[{
+         RowBox[{"t", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}]}], "}"}], "/.", 
+      RowBox[{"\[Tau]", "\[Rule]", "tt"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"tt", ",", "\[Tau]min", ",", "\[Tau]max", ",", 
+       FractionBox[
+        RowBox[{"\[Tau]max", "-", "\[Tau]min"}], "nsteps"]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"toftau", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"toftautemp", ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"roftautemp", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Tau]", ",", 
+        RowBox[{
+         RowBox[{"r", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}]}], "}"}], "/.", 
+      RowBox[{"\[Tau]", "\[Rule]", "tt"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"tt", ",", "\[Tau]min", ",", "\[Tau]max", ",", 
+       FractionBox[
+        RowBox[{"\[Tau]max", "-", "\[Tau]min"}], "nsteps"]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"roftau", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"roftautemp", ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rofttemp", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"t", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"r", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}]}], "}"}], "/.", 
+      RowBox[{"\[Tau]", "\[Rule]", "tt"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"tt", ",", "\[Tau]min", ",", "\[Tau]max", ",", 
+       FractionBox[
+        RowBox[{"\[Tau]max", "-", "\[Tau]min"}], "nsteps"]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"roft", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"rofttemp", ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Theta]ofttemp", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"t", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"\[Theta]", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}]}], "}"}], "/.", 
+      RowBox[{"\[Tau]", "\[Rule]", "tt"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"tt", ",", "\[Tau]min", ",", "\[Tau]max", ",", 
+       FractionBox[
+        RowBox[{"\[Tau]max", "-", "\[Tau]min"}], "nsteps"]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Theta]oft", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"\[Phi]ofttemp", ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Phi]ofttemp", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"t", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"\[Phi]", "[", "\[Tau]", "]"}], "/.", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", "solnumber", "]"}], "]"}]}]}], "}"}], "/.", 
+      RowBox[{"\[Tau]", "\[Rule]", "tt"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"tt", ",", "\[Tau]min", ",", "\[Tau]max", ",", 
+       FractionBox[
+        RowBox[{"\[Tau]max", "-", "\[Tau]min"}], "nsteps"]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Phi]oft", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"\[Phi]ofttemp", ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmin", "=", 
+   RowBox[{"toftau", "[", "\[Tau]min", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmax", "=", 
+   RowBox[{"toftau", "[", "\[Tau]max", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"velocityvector", "[", "t_", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     RowBox[{
+      RowBox[{"roft", "'"}], "[", "t", "]"}], ",", 
+     RowBox[{
+      RowBox[{"\[Theta]oft", "'"}], "[", "t", "]"}], ",", 
+     RowBox[{
+      RowBox[{"\[Phi]oft", "'"}], "[", "t", "]"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"metricoft", "[", "t_", "]"}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"gg", "/.", 
+      RowBox[{"r", "\[Rule]", 
+       RowBox[{"roft", "[", "t", "]"}]}]}], "/.", 
+     RowBox[{"\[Theta]", "\[Rule]", 
+      RowBox[{"\[Theta]oft", "[", "t", "]"}]}]}], "/.", 
+    RowBox[{"\[Phi]", "\[Rule]", 
+     RowBox[{"\[Phi]oft", "[", "t", "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalGamma]oft", "[", "t_", "]"}], "=", 
+   RowBox[{"\[Sqrt]", 
+    RowBox[{"(", 
+     RowBox[{"1", "/", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"metricoft", "[", "t", "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "j"}], "]"}], "]"}], 
+         RowBox[{
+          RowBox[{"velocityvector", "[", "t", "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}], 
+         RowBox[{
+          RowBox[{"velocityvector", "[", "t", "]"}], "[", 
+          RowBox[{"[", "j", "]"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "d"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", "d"}], "}"}]}], "]"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalGamma]ofrtemp1", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"roftau", "[", "\[Tau]", "]"}], ",", 
+       RowBox[{
+        RowBox[{"toftau", "'"}], "[", "\[Tau]", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Tau]", ",", "\[Tau]min", ",", "\[Tau]max", ",", 
+       FractionBox[
+        RowBox[{"\[Tau]max", "-", "\[Tau]min"}], "nsteps"]}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalGamma]ofrtemp2", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"roft", "[", "t", "]"}], ",", 
+       RowBox[{"\[CapitalGamma]oft", "[", "t", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "tmin", ",", "tmax", ",", 
+       FractionBox[
+        RowBox[{"tmax", "-", "tmin"}], "nsteps"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalGamma]ofr1", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"\[CapitalGamma]ofrtemp1", ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalGamma]ofr2", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{
+     RowBox[{"Abs", "[", "\[CapitalGamma]ofrtemp2", "]"}], ",", 
+     RowBox[{"Method", "\[Rule]", "\"\<Spline\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalOmega]", "[", "r_", "]"}], "=", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"\[Chi]", "/", "q"}], 
+     SqrtBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"gg", "[", 
+         RowBox[{"[", 
+          RowBox[{"2", ",", "2"}], "]"}], "]"}], 
+        RowBox[{"gg", "[", 
+         RowBox[{"[", 
+          RowBox[{"4", ",", "4"}], "]"}], "]"}]}], "/.", 
+       RowBox[{"\[Theta]", "\[Rule]", 
+        RowBox[{"\[Pi]", "/", "2"}]}]}]]], 
+    RowBox[{"D", "[", 
+     RowBox[{
+      FractionBox["1", 
+       RowBox[{"\[CapitalGamma]ofr1", "[", "r", "]"}]], ",", "r"}], "]"}], 
+    "temperature"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.6548637930126257`*^9, 3.6548637978369017`*^9}, {
+  3.6548690331055307`*^9, 3.6548690336575623`*^9}, {3.65486931509966*^9, 
+  3.654869318862875*^9}, {3.6548699470498047`*^9, 3.654869947237816*^9}, {
+  3.6548797753931403`*^9, 3.654879776415199*^9}, {3.654880077060395*^9, 
+  3.6548800847478347`*^9}, {3.6548804848197174`*^9, 3.6548804903330326`*^9}}]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{768, 1314},
+WindowMargins->{{Automatic, -777}, {Automatic, -156}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 8864, 255, 801, "Input",
+ InitializationCell->True]
+}
+]
+*)
+
+(* End of internal cache information *)
