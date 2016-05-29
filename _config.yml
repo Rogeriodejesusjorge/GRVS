@@ -9,9 +9,7 @@
 title: GRVS Code 
 email: 
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  General Relativistic Vorticity Solver - code used to solve for the geodesic of a particle in a general spacetime and computing the resulting magnetic field seed.
 baseurl: "/grvs" # the subpath of your site, e.g. /blog
 url: "http://rogeriodejesusjorge.github.io/GRVS" # the base hostname & protocol for your site
 twitter_username: shufflingroger
